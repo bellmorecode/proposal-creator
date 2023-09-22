@@ -1,0 +1,1 @@
+namespace propmaker.Models { public sealed class ProposalDocument {} }
