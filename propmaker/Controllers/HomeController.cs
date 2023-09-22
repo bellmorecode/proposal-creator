@@ -21,9 +21,10 @@ namespace propmaker.Controllers
             gen = new ReportGenerator(cfg);
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var proposals = await svc.GetProposals();
+            return View(proposals);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

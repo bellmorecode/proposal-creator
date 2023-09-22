@@ -1,11 +1,65 @@
-﻿@{
+﻿@model List<ProposalDocument>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<p class="lead">
-    App goes here!
-</p>
+<div class="row">
+    <div class="col-12 ">
+        <select class="form-control form-select mb-2">
+            @foreach(var prop in Model)
+            {
+                <option value="@prop.Id">@prop.Header.Title</option>
+            }
+        </select>
+    </div>
+</div>
 
-<p>
-    Let us get started!
-</p>
+<div class="row mb-2">
+    <div class="col-12">
+        <button type="button" class="btn btn-primary"> Add New Proposal </button>
+        <button type="button" class="btn btn-secondary"> Load Proposal </button>
+        <button type="button" class="btn btn-danger"> Load Sections </button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 ">
+        <form action="/MakerAPI/SaveProposal" name="propForm" id="propForm" method="post">
+            
+            <div class="form-group mb-1">
+                <label>Title</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="Document Title" title="Document Title" />
+            </div>
+            <div class="form-group mb-1">
+                <label>Overview</label>
+                <textarea class="form-control form-text" id="overviewText" name="overviewText" cols="50" rows="5" placeholder="About this proposal" title="Overview"></textarea>
+            </div>
+            <div class="form-group mb-1">
+                <label>Customer Name</label>
+                <input type="text" class="form-control" name="custName" id="custName" placeholder="Macrohard" title="Customer Name" />
+            </div>
+            <div class="form-group mb-1">
+                <label>Contact</label>
+                <input type="text" class="form-control" name="contactName" id="contactName" placeholder="John Smith" title="Contact Name" />
+            </div>
+            <div class="form-group mb-1">
+                <label>Contact Email</label>
+                <input type="email" class="form-control " name="contactEmail" id="contactEmail" placeholder="john@macrohard.com" title="Contact Email" />
+            </div>
+            <div class="form-group mb-1">
+                <label>Filename</label>
+                <input type="text" class="form-control" name="filename" id="filename" placeholder="proposal.docx" title="File Name" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success"> Submit </button>
+                <button type="button" class="btn"> Reset </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+            
+    </script>
+}
