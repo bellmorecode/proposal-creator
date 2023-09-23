@@ -13,53 +13,51 @@
         </select>
     </div>
 </div>
-
 <div class="row mb-2">
     <div class="col-12">
-        <button type="button" class="btn btn-primary"> Add New Proposal </button>
-        <button type="button" class="btn btn-secondary"> Load Proposal </button>
-        <button type="button" class="btn btn-danger"> Load Sections </button>
+        <button type="button" class="btn btn-sm btn-primary" id="addNewButton"> Add New  </button>
+        <button type="button" class="btn btn-sm btn-secondary" id="loadHeaderButton"> Load Header </button>
+        <button type="button" class="btn btn-sm btn-danger" id="loadSectionsButton"> Load Sections </button>
+        <a href="/MakerAPI/GenerateReport/0" target="_blank" class="btn btn-sm btn-info" id="downloadPDFButton"> Download PDF </a>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-12 ">
+    <div class="col-12 header-area">
         <form action="/MakerAPI/SaveProposal" name="propForm" id="propForm" method="post">
             
             <div class="form-group mb-1">
-                <label>Title</label>
+                <label for="title">Title</label>
                 <input type="text" class="form-control" name="title" id="title" placeholder="Document Title" title="Document Title" />
             </div>
             <div class="form-group mb-1">
-                <label>Overview</label>
+                <label for="overviewText">Overview</label>
                 <textarea class="form-control form-text" id="overviewText" name="overviewText" cols="50" rows="5" placeholder="About this proposal" title="Overview"></textarea>
             </div>
             <div class="form-group mb-1">
-                <label>Customer Name</label>
+                <label for="custName">Customer Name</label>
                 <input type="text" class="form-control" name="custName" id="custName" placeholder="Macrohard" title="Customer Name" />
             </div>
             <div class="form-group mb-1">
-                <label>Contact</label>
+                <label for="contactName">Contact</label>
                 <input type="text" class="form-control" name="contactName" id="contactName" placeholder="John Smith" title="Contact Name" />
             </div>
             <div class="form-group mb-1">
-                <label>Contact Email</label>
+                <label for="contactEmail">Contact Email</label>
                 <input type="email" class="form-control " name="contactEmail" id="contactEmail" placeholder="john@macrohard.com" title="Contact Email" />
             </div>
             <div class="form-group mb-1">
-                <label>Filename</label>
+                <label for="filename">Filename</label>
                 <input type="text" class="form-control" name="filename" id="filename" placeholder="proposal.docx" title="File Name" />
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-success"> Submit </button>
-                <button type="button" class="btn"> Reset </button>
+                <button type="submit" class="btn btn-sm btn-success" id="submitButton"> Submit </button>
+                <button type="button" class="btn btn-sm btn-link text-dark" id="resetButton"> Reset </button>
             </div>
         </form>
     </div>
+    <div class="col-12 sections-area" style="display: none;">
+        <div> Header Info </div>
+        <div> Sections </div>
+    </div>
 </div>
-
-@section scripts {
-    <script type="text/javascript">
-            
-    </script>
-}

@@ -11,14 +11,12 @@ namespace propmaker.Controllers
         private readonly IConfiguration cfg;
 
         private readonly DataService svc;
-        private readonly ReportGenerator gen;
 
         public HomeController(ILogger<HomeController> logger, IConfiguration config)
         {
             _logger = logger;
             cfg = config;
             svc = new DataService(cfg);
-            gen = new ReportGenerator(cfg);
         }
 
         public async Task<IActionResult> Index()
