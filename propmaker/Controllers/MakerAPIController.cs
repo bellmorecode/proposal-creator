@@ -22,15 +22,14 @@ namespace propmaker.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveProposal(IFormCollection form)
         {
-            var proposalId = Guid.Empty;
-
+            var proposalId = Guid.Parse($"{form["proposalId"]}");
 
 
             return RedirectToAction("Index", "Home", new { p = proposalId });
         }
 
         [HttpPost]
-        public IActionResult NewProposal(int id = 0)
+        public async Task<IActionResult> NewProposal(int id = 0)
         {
             var success = false;
             // id is the templateId, not used for now but the default is zero, blank template.
@@ -50,7 +49,7 @@ namespace propmaker.Controllers
                 prop.Sections.Add(new DocumentSection { SortOrder = 4, Title = "Project Cost and Terms", Description = " <Coming Soon... > " });
                 prop.Sections.Add(new DocumentSection { SortOrder = 5, Title = "Signatures", Description = " <Coming Soon... > " });
 
-                success = svc.SaveProposal(prop);
+                success = await svc.SaveProposal(prop);
             }
 
             return Json(new { success });

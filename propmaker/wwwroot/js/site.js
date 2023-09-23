@@ -11,7 +11,8 @@
         addNewButton: document.getElementById('addNewButton'), 
         loadHeaderButton: document.getElementById('loadHeaderButton'), 
         loadSectionsButton: document.getElementById('loadSectionsButton'), 
-        downloadPDFButton: document.getElementById('downloadPDFButton')
+        downloadPDFButton: document.getElementById('downloadPDFButton'),
+        proposalIdHidden: document.getElementById('proposalId')
     },
     actions: {
         addNewProposal: function () {
@@ -40,6 +41,7 @@
         resetForm: function () {
             console.log('reset form');
 
+            $(propmaker.controls.proposalIdHidden).val("00000000-0000-0000-0000-000000000000");
             $(propmaker.controls.title).val("");
             $(propmaker.controls.overview).val("");
             $(propmaker.controls.customerName).val("");

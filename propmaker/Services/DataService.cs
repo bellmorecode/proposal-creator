@@ -2,6 +2,7 @@ using propmaker.Models;
 using System.Diagnostics;
 using Newtonsoft.Json;
 using System.Text;
+using System.Reflection.Metadata;
 
 namespace propmaker.Services
 {
@@ -41,11 +42,10 @@ namespace propmaker.Services
             {
                 Trace.TraceError($"Error in Get Proposals: {ex}");
             }
-
             return list;
         }
 
-        internal bool SaveProposal(ProposalDocument document)
+        internal async Task<bool> SaveProposal(ProposalDocument document)
         {
             var result = false;
             try
@@ -54,8 +54,26 @@ namespace propmaker.Services
                 {
                     if (document.Id == Guid.Empty)
                     {
-
+                        document.Id = Guid.NewGuid();
                     }
+                    var list = await GetProposals();
+                    ProposalDocument? target = list.FirstOrDefault(q => q.Id == document.Id);
+                    if (target != null)
+                    {
+                        target.Header.Title = document.Header.Title;
+                        target.Header.Overview = document.Header.Overview;
+                        target.Header.CustomerName = document.Header.CustomerName;
+                        target.Header.CustomerContactName = document.Header.CustomerContactName;
+                        target.Header.CustomerEmail = document.Header.CustomerEmail;
+                        target.Header.Filename = document.Header.Filename;
+                    }
+                    else
+                    {
+                        list.Add(document);
+                    }
+                    var blob = await GetBlob(container, filename);
+                    using var ms = new MemoryStream(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(list)));
+                    _ = await blob.UploadAsync(content: ms, overwrite: true);
                 }
             }
             catch (Exception ex)
